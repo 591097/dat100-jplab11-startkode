@@ -2,52 +2,75 @@ package no.hvl.dat100.jplab11.oppgave3;
 
 import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
+import no.hvl.dat100.jplab11.oppgave2.Bilde;
 
-public class Blogg {
+public class Blogg{
 
-	// TODO: objektvariable 
+	int nesteledig;
+	Innlegg[] innleggtabell;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		innleggtabell = new Innlegg[20];
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		innleggtabell = new Innlegg[lengde];
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return nesteledig;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+	return innleggtabell;
 
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		for(int i = 0; i < nesteledig; i++) {
+            if(innleggtabell[i].erLik(innlegg)) {
+                 return i;
+                 }
+            }
+        return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
-	}
-
-	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		 if(finnInnlegg(innlegg) >= 0) {
+			 return true;
+			 }
+             return false;
 	}
 	
+	
+	public boolean ledigPlass() {
+		for(int i = 0; i < innleggtabell.length; i++) {
+            if(innleggtabell[i] == null) {
+                return true;
+                }
+            }
+             return false;
+        }
+	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		if(!finnes(innlegg) && ledigPlass()) {
+	        innleggtabell[nesteledig] = innlegg;
+	        nesteledig++;
+	        return true;
+	    }
+	            return false;
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+        String tall  = getAntall() + "\n";
+        for(int i=0; i < innleggtabell.length; i++) {
+            tall += innleggtabell[i];
+        }
+            return tall + "\n" + "TEKST" + "\n" ;
+		
 	}
 
-	// valgfrie oppgaver nedenfor
+	// Frivillig
 	
 	public void utvid() {
 		throw new UnsupportedOperationException(TODO.method());
